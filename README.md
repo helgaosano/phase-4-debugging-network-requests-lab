@@ -63,11 +63,31 @@ developing your own process.
 - Add a new toy when the toy form is submitted
 
   - How I debugged:
+    First, I submit the form for creating a toy to initiate a request to the create controller action.
+    In the browser console network, an error message is shown as follows; 
+
+    error: "Internal Server Error"
+    exception: "#<NameError: uninitialized constant ToysController::Toys>"
+    status: 500
+
+    NameError method points out the error, which is the model name in plural. Model name should be in singular.
 
 - Update the number of likes for a toy
 
   - How I debugged:
+    Clicking on the like button, an error message is shown as follows; 
+
+    Unhandled Rejection (SyntaxError): Unexpected end of JSON input
+
+    This means that the server is not returning any content while it is expected to return a string of JSON formatted data. Solution to this problem is to render data in form of json in the update controller action.
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+    Clicking on the Donate to GoodWill button, an error message is shown as follows:
+
+    error: "Not Found"
+    exception: "#<ActionController::RoutingError: No route matches [DELETE] \"/toys/2\">"
+    status: 404
+    
+    Adding route (destroy) which corresponds to the controller action for delete solves this.
